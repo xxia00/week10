@@ -1,0 +1,258 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 800,
+    "height": 500,
+    "title": "Correlation between life expectancy and happiness index(2021)",
+    "data": {
+      "url": "world2021.csv"
+    },
+    "params": [
+      {
+        "name": "Population_Above",
+        "value": 0,
+        "bind": {
+          "input": "range",
+          "min": 0,
+          "max": 10.86,
+          "step": 0.2,
+          "name": "Minimum Population: "
+        }
+      },
+      {
+        "name": "Continent_selection",
+        "bind": {
+          "input": "select",
+          "options": [
+            null,
+            "Western Europe",
+            "North America and ANZ",
+            "Middle East and North Africa",
+            "Central and Eastern Europe",
+            "Latin America and Caribbean",
+            "East Asia",
+            "South Asia",
+            "Southeast Asia",
+            "Commonwealth of Independent States",
+            "Sub-Saharan Africa"
+          ],
+          "labels": [
+            "Show All",
+            "Western Europe",
+            "North America and ANZ",
+            "Middle East and North Africa",
+            "Central and Eastern Europe",
+            "Latin America and Caribbean",
+            "East Asia",
+            "South Asia",
+            "Southeast Asia",
+            "Commonwealth of Independent States",
+            "Sub-Saharan Africa"
+          ],
+          "name": "Continent Selection: "
+        }
+      }
+    ],
+    "transform": [
+      {
+        "filter": "Continent_selection == null || datum.regional_indicator == Continent_selection"
+       
+      },
+      {"filter": "datum.Logged_GDP_per_capita> Population_Above"}
+  
+     
+    ],
+    "encoding": {
+      "x": {
+        "field": "healthy_life_expectancy",
+        "type": "quantitative",
+        "title": "healthy_life_expectancy",
+        "axis": {"tickCount": 7, "labelFontSize": 16,
+        "titleFontSize": 18,
+        "titleFont": "Roboto"
+  
+        }
+      
+      },
+      "y": {
+        "field": "ladder_score",
+        "type": "quantitative",
+        "axis": {"tickCount": 6, "labelFontSize": 16,
+        "titleFontSize": 18,
+        "titleFont": "Roboto"
+  
+        }
+      
+      }
+    },
+    "layer": [
+      { "selection": {
+        "legend_filter": {
+          "type": "multi",
+          "fields": ["regional_indicator"],
+          "bind": "legend"
+        }
+      },
+        "mark": "circle",
+        "encoding": {
+          "size": {
+            "field": "Logged_GDP_per_capita",
+            "title":"GDP",
+            "type": "quantitative",
+            "scale": {
+              "type": "threshold",
+              "domain": [7, 8, 9, 10],
+              "range": [100,200,450,750]
+            },
+            "legend": {"format": ".1s","labelFontSize": 16,
+            "symbolSize": 200,
+            "titleFontSize": 18,
+            "titleFont": "Roboto",
+            "labelFont": "Roboto",
+        
+            "titleColor": "#000000",
+            "labelColor": "#000000"
+          
+          
+          
+          
+          }
+          },
+          "color": {
+            "field": "regional_indicator",
+            "title":"Region",
+            "type": "nominal",
+            "legend": {
+              "labelFontSize": 16,
+              "symbolSize": 200,
+              "titleFontSize": 18,
+              "titleFont": "Roboto",
+              "labelFont": "Roboto",
+          
+              "titleColor": "#000000",
+              "labelColor": "#000000"
+            },
+            "scale": {
+              "domain": [ "Western Europe",
+              "North America and ANZ",
+              "Middle East and North Africa",
+              "Central and Eastern Europe",
+              "Latin America and Caribbean",
+              "East Asia",
+              "South Asia",
+              "Southeast Asia",
+              "Commonwealth of Independent States",
+              "Sub-Saharan Africa"
+            
+              ],
+              "range": [
+                "#e41a1c",
+                "#984ea3",
+                "#ff7f00",
+                "#a6cee3",
+                "#377eb8",
+                "#a65628"
+              ]
+            }
+          },
+          "opacity": {
+              "condition": {"selection": "legend_filter", "value": 0.6},
+              "value": 0.2
+            },
+          "tooltip": [
+            {"field": "country_namey", "type": "nominal"},    
+               {
+              "field": "regional_indicator",
+              "type": "nominal",
+              "title": "Region"
+            },
+            {
+              "field": "ladder_score",
+              "type": "quantitative",
+              "title": "Happiness Ladder score"
+            },
+            {
+              "field": "healthy_life_expectancy",
+              "type": "quantitative",
+              "title": "Healthy Life Expectancy"
+            }
+  
+          
+          ]
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "align": "right",
+          "baseline": "middle",
+          "dx": -12,
+          "fontSize": 11.5,
+          "fontStyle": "italic"
+        },
+        "encoding": {
+          "text": {"field": "country_namey", "type": "nominal"},
+          "color": {"value": "black"},
+          "opacity": {
+            "condition": {
+              "test": "datum['country_namey'] == 'China' || datum['country_namey'] == 'Singapore' || datum['country_namey'] == 'Australia' || datum['country_namey'] == 'New Zealand' || datum['country_namey'] == 'Italy' || datum['country_namey'] == 'Yemen' ||  datum['country_namey'] == 'United States'",
+              "value": 1
+            },
+            "value": 0
+          },
+          "tooltip": [   {"field": "country_namey", "type": "nominal"},    
+          {
+         "field": "regional_indicator",
+         "type": "nominal",
+         "title": "Region"
+       },
+       {
+         "field": "ladder_score",
+         "type": "quantitative",
+         "title": "Happiness Ladder score"
+       },
+       {"field": "Logged_GDP_per_capita", "type": "quantitative", "format": ",","title":"GDP per Capita"},
+       {
+         "field": "healthy_life_expectancy",
+         "type": "quantitative",
+         "title": "Healthy Life Expectancy"
+       }
+  
+           
+          ]
+        }
+      },
+       {
+        "mark": {
+          "type": "text",
+          "align": "left",
+          "dy": 0,
+          "dx": -300,
+          "fontStyle": "Roboto"
+        },
+        "encoding": {
+          "text": {
+            "field": "country_namey",
+            "type": "nominal",
+            "condition": [
+              {
+                "test": "datum['country_namey']== 'Australia'",
+                "value": [
+                  "Australia has the score of 5.384"
+                ]
+              }
+            ]
+          },
+          "color": {
+            "value": "black"
+          },
+          "opacity": {
+            "condition": {
+              "test": "datum['country_namey']== 'Australia'",
+              "value": 2
+            },
+            "value": 0
+          }
+        }
+      }
+    ]
+  }
