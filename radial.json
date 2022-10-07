@@ -1,0 +1,138 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+    "title":"Wine consumption(2016)",
+
+    "width": 800,
+    "height" :500,
+    "data": {"url": "HappinessAlcoholConsumption.csv"},
+    "transform": [
+      {"filter": "rank_country == null ||datum.Country ==rank_country"}
+      
+    ],
+    "params": [
+      {
+        "name": "rank_country",
+       
+        "bind": {
+          "input": "select",
+          "options": [
+            null,
+            "Australia",
+            "Austria",
+            "Belgium",
+            "Brazil",
+            "Canada",
+            "Costa Rica",
+            "Denmark",
+            "Finland",
+            "Germany",
+            "Iceland",
+            "Ireland",
+            "Israel",
+            "Luxembourg",
+            "Netherlands",
+            "New Zealand",
+            "Norway",
+            "Sweden",
+            "Switzerland",
+            "United States"
+          ],
+          "labels": [
+            "Show All",
+            "Australia",
+            "Austria",
+            "Belgium",
+            "Brazil",
+            "Canada",
+            "Costa Rica",
+            "Denmark",
+            "Finland",
+            "Germany",
+            "Iceland",
+            "Ireland",
+            "Israel",
+            "Luxembourg",
+            "Netherlands",
+            "New Zealand",
+            "Norway",
+            "Sweden",
+            "Switzerland",
+            "United States"
+          ],
+          "name": "Continent Selection: "
+        }
+       
+      }
+    ],
+    "encoding": {
+      "theta": {"field": "Wine_PerCapita", "type": "quantitative", "stack": true},
+      "radius": {"field": "Wine_PerCapita", "scale": {"type": "sqrt", "zero": true, "rangeMin": 20}},
+      "color": {
+        "field": "Country",
+        "type": "nominal",
+        "legend": {
+          "labelFontSize": 16,
+          "symbolSize": 200,
+          "titleFontSize": 18,
+          "titleFont": "Roboto",
+          "labelFont": "Roboto",
+      
+          "titleColor": "#000000",
+          "labelColor": "#000000"
+        },
+        "scale": {"scheme":"rainbow"
+          
+        }
+    }, "opacity": {
+      "condition": {"selection": "legend_filter", "value": 1},
+      "value": 0.2
+    },
+        "tooltip": [
+          {"field": "Country", "type": "nominal","title":"Country Name"},
+     
+          {"field": "Wine_PerCapita", "type": "quantitative", "format": ".2f","title":"Wine_PerCapita"},
+          {"field": "HappinessScore", "type": "quantitative", "format": ".2f","title":"Happiness Score"}
+        
+        ]
+  },
+  "layer": [
+    
+  { "selection": {
+    "legend_filter": {
+      "type": "multi",
+      "fields": ["Country"],
+      "bind": "legend"
+    }
+  },
+  "mark": {"type": "arc", "innerRadius": 60, "stroke": "#ffffff"}
+  },{
+    "mark": {"type": "text","dy":190,"fontSize":15,"dx":200, "fontStyle": "Roboto"},
+    "encoding": {
+      "text": {"field": " Country", "type": "nominal",
+       "condition": [
+        {
+          "test": "datum['Country']== 'Germany'",
+          "value": [
+            " Germany has the Wine_PerCapita of 175.00"
+          ]
+        }
+      ]
+      },
+      "color": {
+        "value": "black"
+  
+      },
+    
+      "opacity": {
+        "condition": {
+          "test": "datum.Country == 'Germany'",
+          "value": 1
+        },
+        "value": 0
+      }
+    }
+    }
+  
+  ]
+  }
