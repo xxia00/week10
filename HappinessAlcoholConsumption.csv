@@ -1,0 +1,20 @@
+Country,Region,Hemisphere,HappinessScore,HDI,GDP_PerCapita,Beer_PerCapita,Spirit_PerCapita,Wine_PerCapita
+Denmark,Western Europe,north,7.526,928,53.579,224,81,278
+Switzerland,Western Europe,north,7.509,943,79.866,185,100,280
+Iceland,Western Europe,north,7.501,933,60.53,233,61,78
+Norway,Western Europe,north,7.498,951,70.89,169,71,129
+Finland,Western Europe,north,7.413,918,43.433,263,133,97
+Canada,North America,north,7.404,922,42.349,240,122,100
+Netherlands,Western Europe,north,7.339,928,45.638,251,88,190
+New Zealand,Australia and New Zealand,south,7.334,915,40.332,203,79,175
+Australia,Australia and New Zealand,south,7.313,938,49.897,261,72,212
+Sweden,Western Europe,north,7.291,932,51.845,152,60,186
+Israel,Middle East and Northern Africa,north,7.267,902,37.181,63,69,9
+Austria,Western Europe,north,7.119,906,44.731,279,75,191
+United States,North America,north,7.104,922,57.589,249,158,84
+Costa Rica,Latin America and Caribbean,north,7.087,791,11.733,149,87,11
+Germany,Western Europe,north,6.994,934,42.233,346,117,175
+Brazil,Latin America and Caribbean,both,6.952,758,8.639,245,145,16
+Belgium,Western Europe,north,6.929,915,41.261,295,84,212
+Ireland,Western Europe,north,6.907,934,64.1,313,118,165
+Luxembourg,Western Europe,north,6.871,904,100.739,236,133,271
